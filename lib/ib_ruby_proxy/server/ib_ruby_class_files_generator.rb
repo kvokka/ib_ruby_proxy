@@ -4,6 +4,8 @@ module IbRubyProxy
     # actual files with the source for both Ruby classes representing IB classes and Ruby extensions
     # for those.
     class IbRubyClassFilesGenerator
+      SKIPPED_CLASS_NAMES = ['Order'].freeze
+
       attr_reader :client_code_dir, :server_code_dir
 
       # @param [String] client_code_dir
@@ -40,6 +42,8 @@ module IbRubyProxy
 
       def do_generate_all
         java_classes.each do |class_name|
+          next if SKIPPED_CLASS_NAMES.include?(class_name)
+
           generate_files class_name
         end
       end
