@@ -1,8 +1,10 @@
 # ib_ruby_proxy
 
-[![CircleCI](https://circleci.com/gh/jorgemanrubia/ib_ruby_proxy.svg?style=svg)](https://circleci.com/gh/jorgemanrubia/ib_ruby_proxy)
+[![CircleCI](https://circleci.com/gh/kvokka/ib_ruby_proxy.svg?style=svg)](https://circleci.com/gh/kvokka/ib_ruby_proxy)
 
 Service for invoking the [Interactive Brokers (IB) API](https://www.interactivebrokers.com/en/index.php?f=5041) from Ruby.
+
+**NOTE**: This is a fork of the [ib_ruby_proxy](https://github.com/jorgemanrubia/ib_ruby_proxy).
 
 `ib_ruby_proxy` acts as a mediator between your Ruby code and the IB software making the API calls ([Gateway](https://www.interactivebrokers.com/en/index.php?f=16457) or [TWS](https://www.interactivebrokers.com/en/index.php?f=16457)). Internally, it invokes the official IB Java API and translates objects between Ruby and Java worlds. It also translates method and callback names so that you can use Ruby convention (underscore) instead of Java's (camelcase).
 
@@ -166,7 +168,7 @@ expect(contract.long_name).to eq('E-mini S&P 500')
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/jorgemanrubia/ib_ruby_proxy.
+Bug reports and pull requests are welcome on GitHub at https://github.com/kvokka/ib_ruby_proxy.
 
 ## License
 
