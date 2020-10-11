@@ -4,7 +4,12 @@ module IbRubyProxy
     # actual files with the source for both Ruby classes representing IB classes and Ruby extensions
     # for those.
     class IbRubyClassFilesGenerator
-      SKIPPED_CLASS_NAMES = ['Order'].freeze
+      # Fork 'anarkioteam/ib_ruby_proxy' skip orders from auto generation (at mar2020).
+      # Maybe it was old API, which was fixed with the latest update.
+      # Anyway, no manual changes until facing up the same problem
+      #
+      # SKIPPED_CLASS_NAMES = %w[Order].freeze
+      SKIPPED_CLASS_NAMES = [].freeze
 
       attr_reader :client_code_dir, :server_code_dir
 
