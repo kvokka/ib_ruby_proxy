@@ -1,5 +1,4 @@
 require 'ib_ruby_proxy/version'
-require 'awesome_print'
 require 'drb'
 require 'logger'
 require 'concurrent-ruby'

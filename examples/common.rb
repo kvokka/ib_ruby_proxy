@@ -1,5 +1,6 @@
 require 'drb'
 require 'ib_ruby_proxy'
+require 'amazing_print'
 
 class Securities
   class << self
