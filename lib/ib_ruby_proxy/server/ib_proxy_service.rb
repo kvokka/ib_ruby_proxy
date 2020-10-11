@@ -20,19 +20,25 @@ module IbRubyProxy
     # * Starts an IB message-processing thread that will dispatch messages sent to IB client app (
     #   gateway or TWS)
     class IbProxyService
+      DEFAULT_IB_HOST = 'localhost'.freeze
       DEFAULT_IB_GATEWAY_PORT = 4002
+      DEFAULT_DRB_HOST = 'localhost'.freeze
       DEFAULT_DRB_PORT = 1992
+      DEFAULT_SERVER_VERBOSITY = 'true'.freeze
 
       # @param [String] ib_host Hostname for the IB client app (gateway or TWS). Default +localhost+
       # @param [Integer] ib_port Port for hte IB client app (gateway or TWS). Default +4002+ (gateway)
       # @param [String] drb_host Hostname for the DRB process. Default +localhost+
       # @param [Integer] drb_port Port for the . Default +1992+
-      def initialize(ib_host: 'localhost', ib_port: DEFAULT_IB_GATEWAY_PORT,
-                     drb_host: 'localhost', drb_port: DEFAULT_DRB_PORT)
+      # @param [String] verbose_server true/false for server verbosity . Default +true+
+      def initialize(ib_host: DEFAULT_IB_HOST, ib_port: DEFAULT_IB_GATEWAY_PORT,
+                     drb_host: DEFAULT_DRB_HOST, drb_port: DEFAULT_DRB_PORT,
+                     verbose_server: DEFAULT_SERVER_VERBOSITY)
         @ib_host = ib_host
         @ib_port = ib_port
         @drb_host = drb_host
         @drb_port = drb_port
+        @verbose_server = { 'true' => true, 'false' => false }.fetch(verbose_server, true)
 
         @wrapper = IbRubyProxy::Server::IbWrapperAdapter.new
         @client = wrapper.client
@@ -46,7 +52,7 @@ module IbRubyProxy
       # Clients of the DRb service will get an {IbClientAdapter} object to interact with the IB api
       # @return [void]
       def start
-        DRb.start_service("druby://#{drb_host}:#{drb_port}", ib_client_adapter, verbose: true)
+        DRb.start_service("druby://#{drb_host}:#{drb_port}", ib_client_adapter, verbose: @verbose_server)
         start_ib_message_processing_thread
         puts "Ib proxy server started at druby://#{drb_host}:#{drb_port}. Connected to IB at"\
              " #{ib_host}:#{ib_port}"
