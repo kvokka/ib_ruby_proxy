@@ -1,3 +1,5 @@
+#!/usr/bin/env ruby
+
 require_relative './common'
 
 client = IbRubyProxy::Client::Client.from_drb
@@ -13,7 +15,7 @@ aapl = IbRubyProxy::Client::Ib::Contract.new symbol: 'AAPL',
                                              exchange: 'ISLAND'
 
 client.add_ib_callbacks_observer CallbacksObserver.new
-client.req_historical_ticks(18009, aapl, '20190304 12:00:00', nil, 100,
-                            'MIDPOINT', 1, false, nil)
+client.req_historical_ticks(IbRubyProxy::Util::Id.call, aapl,
+                            "#{Utils.prior_friday} 12:00:00", nil, 100, 'MIDPOINT', 1, false, nil)
 
 sleep

@@ -1,10 +1,19 @@
+#!/usr/bin/env ruby
+
 require_relative './common'
 
 client = IbRubyProxy::Client::Client.from_drb
 
-client.req_historical_ticks(18009, Securities.emini, nil, '20190304 17:00:00', 100,
+result = []
+client.req_historical_ticks(IbRubyProxy::Util::Id.call, Securities.emini, nil,
+                            "#{Utils.prior_friday} 17:00:00", 10,
                             'MIDPOINT', 1, false, nil) do |_callback, _request_id, ticks, _done|
-  ap ticks
+  result += ticks
 end
 
-sleep
+sleep(0.0001) until result.size >= 10
+
+ap result
+# ap r
+
+sleep 0.3

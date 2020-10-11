@@ -80,7 +80,9 @@ module IbRubyProxy
       class BlockCallbackHandler
         include IbRubyProxy::Util::HasLogger
 
-        attr_reader :discriminate_by_argument_nth, :block
+        Result = Struct.new(:callback_name, :arguments, :done, keyword_init: true)
+
+        attr_reader :discriminate_by_argument_nth, :block, :result
 
         def initialize(discriminate_by_argument_nth)
           @discriminate_by_argument_nth = discriminate_by_argument_nth
@@ -99,7 +101,7 @@ module IbRubyProxy
           else
             @block = block
           end
-          nil
+          @result = Result.new(done: false)
         end
 
         def callback_received(callback_name, *arguments)
@@ -112,7 +114,12 @@ module IbRubyProxy
                       @block
                     end
 
+            # this odd order helps to avoid the use case when block mutates the arguments
+            @result.callback_name = callback_name
+            @result.arguments = arguments
             block&.call(callback_name, *arguments)
+            @result.done = true
+            @result
           end
         end
       end

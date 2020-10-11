@@ -12,16 +12,12 @@ module Utils
     days_before = (date.wday + 1) % 7 + 1
     (date - days_before).strftime('%Y%m%d')
   end
-
-  def order_id
-    @order_id = (@order_id || Time.now.to_i % 2**20) + 1
-  end
 end
 
 class Securities
   class << self
     def emini
-      expiration_month = Utils.prior_friday[0..-3]
+      expiration_month = (Date.today + 60).strftime('%Y%m')
       IbRubyProxy::Client::Ib::Contract.new symbol: 'ES',
                                             sec_type: 'FUT',
                                             currency: 'USD',
