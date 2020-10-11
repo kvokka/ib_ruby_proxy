@@ -128,6 +128,15 @@ class Java::ComIbClient::Order
     ruby_object.dont_use_auto_price_for_hedge = dontUseAutoPriceForHedge().to_ruby
     ruby_object.is_oms_container = isOmsContainer().to_ruby
     ruby_object.discretionary_up_to_limit_price = discretionaryUpToLimitPrice().to_ruby
+    ruby_object.auto_cancel_date = autoCancelDate().to_ruby
+    ruby_object.filled_quantity = filledQuantity().to_ruby
+    ruby_object.ref_futures_con_id = refFuturesConId().to_ruby
+    ruby_object.auto_cancel_parent = autoCancelParent().to_ruby
+    ruby_object.shareholder = shareholder().to_ruby
+    ruby_object.imbalance_only = imbalanceOnly().to_ruby
+    ruby_object.route_marketable_to_bbo = routeMarketableToBbo().to_ruby
+    ruby_object.parent_perm_id = parentPermId().to_ruby
+    ruby_object.use_price_mgmt_algo = usePriceMgmtAlgo().to_ruby
 
     ruby_object
   end
