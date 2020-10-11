@@ -41,3 +41,8 @@ mapped_callbacks:
       - historical_data_update
     discriminate_by_argument_nth: 0
 
+  req_account_summary:
+    callbacks:
+      - account_summary
+      - account_summary_end
+    discriminate_by_argument_nth: 0

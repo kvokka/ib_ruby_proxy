@@ -106,10 +106,10 @@ The IB API defines several [value object](https://martinfowler.com/bliki/ValueOb
 
 `ib_ruby_proxy` includes a code generation utility that analyzes the IB Java classes and generates:
 
-- For the client side, a [Ruby representation of each IB class](https://www.rubydoc.info/github/jorgemanrubia/ib_ruby_proxy/IbRubyProxy/Client/Ib). These classes contain all the data properties and, also, a method for converting them into their Java counterparts. 
+- For the client side, a [Ruby representation of each IB class](https://www.rubydoc.info/github/jorgemanrubia/ib_ruby_proxy/IbRubyProxy/Client/Ib). These classes contain all the data properties and, also, a method for converting them into their Java counterparts.
 - For the server side, it extends each Java class to make them convertible into their Ruby counterparts.
 
-The list of generated classes is defined by the property `classes` of `lib/ib_ruby_proxy/config.yml`. 
+The list of generated classes is defined by the property `classes` of `lib/ib_ruby_proxy/config.yml`.
 
 To execute the code generation script run:
 
@@ -162,6 +162,7 @@ expect(contract.long_name).to eq('E-mini S&P 500')
 
 - [Blog post](https://www.jorgemanrubia.com/2019/07/07/invoke_the_interactive_brokers_api_from_ruby/)
 - [Api docs](https://www.rubydoc.info/github/jorgemanrubia/ib_ruby_proxy)
+- [IB API docs](https://interactivebrokers.github.io/tws-api/annotated.html)
 
 ## Contributing
 
