@@ -34,19 +34,8 @@ command :server do |c|
       verbose_server: IbRubyProxy::Server::IbProxyService::DEFAULT_SERVER_VERBOSITY,
     )
 
-    ib_host = options.ib_host
-    ib_port = options.ib_port
-    drb_host = options.drb_host
-    drb_port = options.drb_port
-    verbose_server = options.verbose_server
+    puts "Starting with ib #{options.ib_host}:#{options.ib_port} and drb #{options.drb_host}:#{options.drb_port}..."
 
-    puts "Starting with ib port #{ib_port} and drb port #{drb_port}..."
-    IbRubyProxy::Server::IbProxyService.new(
-      ib_host: ib_host,
-      ib_port: ib_port,
-      drb_host: drb_host,
-      drb_port: drb_port,
-      verbose_server: verbose_server
-    ).start
+    IbRubyProxy::Server::IbProxyService.new(**options.default).start
   end
 end

@@ -38,7 +38,7 @@ module IbRubyProxy
         @ib_port = ib_port
         @drb_host = drb_host
         @drb_port = drb_port
-        @verbose_server = { 'true' => true, 'false' => false }.fetch(verbose_server, true)
+        @verbose_server = %w[1 t true].include?(verbose_server)
 
         @wrapper = IbRubyProxy::Server::IbWrapperAdapter.new
         @client = wrapper.client
