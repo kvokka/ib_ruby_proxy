@@ -25,7 +25,7 @@ mapped_callbacks:
     callbacks:
       - contract_details
       - contract_details_end
-    discriminate_by_argument_nth: 0,
+    discriminate_by_argument_nth: 0
 
   req_tick_by_tick_data:
     callbacks:
