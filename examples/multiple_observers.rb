@@ -38,7 +38,7 @@ requests_count = (ARGV.first || 3).to_i
 requests_count.times do |i|
   client.req_historical_data(Utils.order_id,
                              aapl,
-                             "#{Utils.prior_friday} 15:#{i}0:00",
+                             "#{IbRubyProxy::Util.prior_friday} 15:#{i}0:00",
                              '600 S',
                              '5 mins',
                              'TRADES',

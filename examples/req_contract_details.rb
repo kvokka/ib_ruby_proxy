@@ -4,20 +4,13 @@ require_relative './common'
 
 client = IbRubyProxy::Client::Client.from_drb
 
-result = client.req_contract_details(IbRubyProxy::Util::Id.call,
-                                     Securities.emini) do |_callback, _request_id, contract_details|
-  contract_details
+promise = Concurrent::Promises.resolvable_future.tap do |future|
+  id = IbRubyProxy::Util::Id.call
+  client.req_contract_details(id, Securities.emini) do |_callback, _req_id, contract_details|
+    future.fulfill(contract_details)
+  end
 end
+
 puts 'Before callback fired'
-ap result
-
-# rubocop:disable Style/RedundantBegin
-begin
-  sleep(0.001)
-  print('.')
-end while !result.done
-# rubocop:enable Style/RedundantBegin
-puts
-
+ap promise.value
 puts 'After callback fired'
-ap result
