@@ -106,6 +106,7 @@ module IbRubyProxy
           if ENV['IB_RUBY_PROXY_RAISE_ON_ALL_ERRORS'] && callback_name.to_s == 'error'
             raise StandardError, arguments.join('. ')
           end
+
           block = if @discriminate_by_argument_nth
                     @blocks_by_discriminator[arguments[@discriminate_by_argument_nth]]
                   else

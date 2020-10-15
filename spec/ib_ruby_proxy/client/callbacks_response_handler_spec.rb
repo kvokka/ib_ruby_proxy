@@ -51,13 +51,23 @@ describe IbRubyProxy::Client::CallbacksResponseHandler do
         callbacks_response_handler.callback_received(:response_callback, 2, 'value 2-1', 'value 2-2')
       end
 
-      it 'triggers an exception when the error callback is invoked' do
+      it 'triggers an exception when the error callback is invoked and ENV var is true' do
+        allow(ENV).to receive(:[]).with('IB_RUBY_PROXY_RAISE_ON_ALL_ERRORS').and_return(true)
         callbacks_response_handler.configure_block_callback method: :some_method,
                                                             callbacks: [:error],
                                                             discriminate_by_argument_nth: 0
 
         expect { callbacks_response_handler.callback_received(:error, 'some', 'error') }
           .to raise_error('some. error')
+      end
+
+      it 'does not triggers an exception when the error callback is invoked' do
+        callbacks_response_handler.configure_block_callback method: :some_method,
+                                                            callbacks: [:error],
+                                                            discriminate_by_argument_nth: 0
+
+        expect { callbacks_response_handler.callback_received(:error, 'some', 'error') }
+          .not_to raise_error
       end
     end
   end
