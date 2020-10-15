@@ -89,6 +89,17 @@ end
 
 This feature is currently under development, and not all the mappings have been configured yet. Please check [how to add custom mappings](#custom-mappings) if you want to contribute new mappings (pull requests welcomed).
 
+#### Error handling
+
+IB software has a trait - all messages from server, sent by server initiative, are
+technically errors. Including connection/re-connection messages, or unsubscribed
+market data message. It is developer's responsibility to handle all this alerts.
+The best approach for it is to create separate observer for it.
+
+For development/testing purposes there is an option to set environment variable
+`IB_RUBY_PROXY_RAISE_ON_ALL_ERRORS` to true and get server side raises in
+**all** concurrent callbacks.
+
 ## Development
 
 ### How things work internally
