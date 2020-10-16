@@ -3,16 +3,17 @@ classes:
   - DeltaNeutralContract
   - Contract
   - Order
+  - OrderState
   - HistoricalTickLast
   - TickAttribLast
   - Bar
   - HistoricalTick
   - TickAttribBidAsk
-  - HistoricalTickLast
-  - TickAttribLast
   - HistoricalTickBidAsk
   - ContractDetails
   - ScannerSubscription
+  - PriceCondition
+  - TimeCondition
 
 mapped_callbacks:
   req_historical_ticks:
@@ -57,4 +58,37 @@ mapped_callbacks:
     callbacks:
       - scanner_data
       - scanner_data_end
+    discriminate_by_argument_nth: 0
+
+  req_real_time_bars:
+    callbacks:
+      - realtime_bar
+    discriminate_by_argument_nth: 0
+
+  req_market_depth:
+    callbacks:
+      - update_mkt_depth
+      - update_mkt_depth_l2
+    discriminate_by_argument_nth: 0
+
+  req_mkt_data:
+    callbacks:
+      - tick_size
+      - tick_price
+    discriminate_by_argument_nth: 0
+
+  req_historical_news:
+    callbacks:
+      - historical_news
+      - historical_news_end
+    discriminate_by_argument_nth: 0
+
+  req_news_providers:
+    callbacks:
+      - news_providers
+    discriminate_by_argument_nth: 0
+
+  req_news_article:
+    callbacks:
+      - news_article
     discriminate_by_argument_nth: 0
