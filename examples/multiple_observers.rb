@@ -33,13 +33,13 @@ client = IbRubyProxy::Client::Client.from_drb
 client.add_ib_callbacks_observer CallbacksObserver.new
 client.add_ib_callbacks_observer RequestsObserver.new
 
-requests_count = (ARGV.first || 3).to_i
+requests_count = (ARGV.first || 1).to_i
 
 requests_count.times do |i|
-  client.req_historical_data(Utils.order_id,
+  client.req_historical_data(IbRubyProxy::Util::Id.call,
                              aapl,
                              "#{IbRubyProxy::Util.prior_friday} 15:#{i}0:00",
-                             '600 S',
+                             '25 D',
                              '5 mins',
                              'TRADES',
                              1,
@@ -55,4 +55,4 @@ sleep(0.001) until RequestsObserver
                    .select { |o| o.callback == :historical_data_end }
                    .size == requests_count
 
-puts "it took #{(Time.now - t).to_f}"
+puts "Processed #{RequestsObserver.processed.size} bars, it took #{(Time.now - t).to_f}"
