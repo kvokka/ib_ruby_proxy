@@ -32,8 +32,7 @@ module IbRubyProxy
               changed
               notify_observers *(["#{ruby_method_name}"] + ruby_arguments)
             else
-              logger.debug "Received #{ruby_method_name}"
-              logger.debug ruby_arguments.inspect
+              logger.debug "Received '#{ruby_method_name}' with arguments \#{ruby_arguments.inspect}"
             end
           end
         RUBY
